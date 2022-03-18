@@ -24,7 +24,7 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 # *****************************************************************************
-
+import sys
 import functools
 import json
 import re
@@ -51,7 +51,10 @@ class BetaBinomialInterpolator:
     def __init__(self, round_mel_len_to=100, round_text_len_to=20):
         self.round_mel_len_to = round_mel_len_to
         self.round_text_len_to = round_text_len_to
-        self.bank = functools.lru_cache(beta_binomial_prior_distribution)
+        if sys.version_info.major == 3 and sys.version_info.minor < 8:
+            self.bank = functools.lru_cache()(beta_binomial_prior_distribution)
+        else:
+            self.bank = functools.lru_cache(beta_binomial_prior_distribution)        
 
     def round(self, val, to):
         return max(1, int(np.round((val + 1) / to))) * to
