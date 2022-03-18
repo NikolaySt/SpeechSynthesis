@@ -105,7 +105,6 @@ def unwrap_distributed(state_dict):
         new_state_dict[new_key] = value
     return new_state_dict
 
-
 def load_and_setup_model(model_name, parser, checkpoint, fp16_run, cpu_run, forward_is_infer=False):
     model_parser = models.model_parser(model_name, parser, add_help=False)
     model_args, _ = model_parser.parse_known_args()
