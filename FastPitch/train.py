@@ -212,6 +212,8 @@ def last_checkpoint(output):
         return saved[-1]
     elif len(saved) >= 2:
         return saved[-2]
+    elif os.path.exists(f'{output}/FastPitch_checkpoint.pt'):
+        return f'{output}/FastPitch_checkpoint.pt'
     else:
         return None
 

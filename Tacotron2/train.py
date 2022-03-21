@@ -232,6 +232,8 @@ def get_last_checkpoint_filename(output_dir, model_name):
     if os.path.exists(symlink):
         print("Loading checkpoint from symlink", symlink)
         return os.path.join(output_dir, os.readlink(symlink))
+    elif os.path.exists(f'{output_dir}/checkpoint_{model_name}.pt'):
+        return f'{output_dir}/checkpoint_{model_name}.pt'
     else:
         print("No last checkpoint available - starting from epoch 0 ")
         return ""
