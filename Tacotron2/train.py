@@ -210,7 +210,8 @@ def save_checkpoint(model, optimizer, scaler, epoch, config, output_dir,
                       'optimizer': optimizer.state_dict(),
                       'scaler': scaler.state_dict()}
 
-        checkpoint_filename = "checkpoint_{}_{}.pt".format(model_name, epoch)
+        #checkpoint_filename = "checkpoint_{}_{}.pt".format(model_name, epoch)
+        checkpoint_filename = "checkpoint_{}.pt".format(model_name)
         checkpoint_path = os.path.join(output_dir, checkpoint_filename)
         print("Saving model and optimizer state at epoch {} to {}".format(
             epoch, checkpoint_path))
@@ -262,8 +263,8 @@ def load_checkpoint(model, optimizer, scaler, epoch, filepath, local_rank):
     
     #print(checkpoint)
     if 'epoch' in checkpoint: 
-        epoch[0] = checkpoint['epoch']+1
-        #epoch[0] = 0
+        #epoch[0] = checkpoint['epoch']+1
+        epoch[0] = 0
         
     #device_id = local_rank % torch.cuda.device_count()
     #torch.cuda.set_rng_state(checkpoint['cuda_rng_state_all'][device_id])
